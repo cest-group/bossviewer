@@ -1,20 +1,63 @@
+// Imports
+@import 'normalize.css';
+
 // Variables
 $slider-height: 4rem;
 $slider-width: 4rem;
-$slider-radius: 12rem;
+$slider-radius: 10rem;
 $slider-color: #444;
 
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Exo');
 
-body {
-    font-family: "Exo";
-    color: #444;
+// Mixinz
+@mixin box-shadow($top, $left, $blur, $color, $inset: false) {
+  @if $inset {
+    -webkit-box-shadow:inset $top $left $blur $color;
+    -moz-box-shadow:inset $top $left $blur $color;
+    box-shadow:inset $top $left $blur $color;
+  } @else {
+    -webkit-box-shadow: $top $left $blur $color;
+    -moz-box-shadow: $top $left $blur $color;
+    box-shadow: $top $left $blur $color;
+  }
 }
 
-.slidecontainer {
-  margin: 1rem;
-  width: 100%; /* Width of the outside container */
+body {
+    font-family: "Exo";
+    color: #eee;
+    height: 100%;
+    background: #360033;  /* fallback for old browsers */
+    background: radial-gradient(#0b8793, #1a3c54);
+}
+
+html {
+    height: 100%;
+}
+
+.container {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+#viewer-canvas {
+    flex: 1 1 100%;
+    //background: #360033;
+    //background: radial-gradient(#0b8793, #1a3c54);
+    //background: linear-gradient(#0b8793, #360033);
+}
+
+.sidebar {
+    flex: 0 0 0;
+    //background: #1a3c54;
+    z-index: 2;
+    //border-right: 1px rgba(255, 255, 255, 0.05) solid;
+    padding: 0rem 2rem;
+    //@include box-shadow(5px, 5px, 50px, rgba(0,0,0,0.3));
+}
+
+#slidecontainer {
   outline: none;
   display: flex;
   flex-direction: column;

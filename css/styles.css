@@ -1,13 +1,35 @@
+@import 'normalize.css';
 @import url("https://fonts.googleapis.com/css?family=Exo");
 body {
   font-family: "Exo";
-  color: #444;
+  color: #eee;
+  height: 100%;
+  background: #360033;
+  /* fallback for old browsers */
+  background: radial-gradient(#0b8793, #1a3c54);
 }
 
-.slidecontainer {
-  margin: 1rem;
-  width: 100%;
-  /* Width of the outside container */
+html {
+  height: 100%;
+}
+
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+#viewer-canvas {
+  flex: 1 1 100%;
+}
+
+.sidebar {
+  flex: 0 0 0;
+  z-index: 2;
+  padding: 0rem 2rem;
+}
+
+#slidecontainer {
   outline: none;
   display: flex;
   flex-direction: column;
@@ -67,8 +89,8 @@ body {
 
 .round-slider {
   align-self: center;
-  width: 12rem;
-  height: 12rem;
+  width: 10rem;
+  height: 10rem;
   cursor: pointer;
 }
 

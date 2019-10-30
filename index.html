@@ -5,19 +5,53 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <link rel="stylesheet" href="css/styles.css?v=1.0">
-        <script src="js/index.js" defer></script>
+        <script src="js/rafpolyfill.js"></script>
+        <script src="js/three.min.js"></script>
+        <script src="js/Projector.js"></script>
+        <script src="js/CanvasRenderer.js"></script>
+        <script src="js/system.js"></script>
+        <script src="js/orthographiccontrols.js"></script>
+        <script src="js/dat.gui.min.js"></script>
     </head>
     <body>
-        <!--Linear sliders-->
+        <div class="container">
 
-        <div class="slidecontainer">
-            <h1>Linear slider</h1>
-            <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+            <!--Linear sliders-->
+            <!--<div class="slidecontainer">-->
+                <!--<h1>Linear slider</h1>-->
+                <!--<input type="range" min="1" max="100" value="50" class="slider" id="myRange">-->
+            <!--</div>-->
+
+            <!--Scoreboard-->
+            <div id="scoreboard" class="sidebar">
+                <h1>Scoreboard</h1>
+            </div>
+
+            <!--Viewer canvas-->
+            <div id="viewer-canvas">
+            </div>
+
+            <!--Sliders-->
+            <div id="slidecontainer" class="sidebar">
+                <h1>Parameters</h1>
+                <div class="round-slider" style="background-image: url('img/knob.png'); background-position: center; background-size: cover;"></div>
+                <div class="round-slider" style="background-image: url('img/knob.png'); background-position: center; background-size: cover;"></div>
+                <div class="round-slider" style="background-image: url('img/knob.png'); background-position: center; background-size: cover;"></div>
+                <div class="round-slider" style="background-image: url('img/knob.png'); background-position: center; background-size: cover;"></div>
+            </div>
         </div>
 
-        <div class="slidecontainer">
-            <h1>Radial slider</h1>
-            <div class="round-slider" style="background-image: url('img/knob.png'); background-position: center; background-size: cover;"></div>
-        </div>
+        <!--Using system.js to enable modules in JavaScript.-->
+        <script>
+        System.config({
+            baseURL: './js',
+            packages: {
+                '.': {
+                    defaultExtensions: 'js'
+                }
+            },
+        });
+        System.import('index.js');
+        </script>
     </body>
 </html>

@@ -1,3 +1,29 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const structureviewer = require("structureviewer");
+
+// Load the structure viewer
+let targetElem = document.getElementById("viewer-canvas");
+let options = {
+    showParam: false,
+    showCopies: false,
+    showShadows: true,
+    showTags: true,
+    allowRepeat: false,
+    showCell: true,
+    wrap: false,
+    showLegend: false,
+    showOptions: false,
+    showUnit: true,
+    showBonds: true,
+    radiusScale: 0.8,
+    enableZoom: false,
+    enablePan: false,
+    enableRotate: false
+};
+var viewer = new structureviewer.StructureViewer(targetElem, false, options);
+viewer.loadJSON("data/geometry.json");
+
 var sliders = document.getElementsByClassName("round-slider");
 for (let i = 0; i < sliders.length; i++) {
 	sliders[i].addEventListener("click", round_slider_tune, false);
