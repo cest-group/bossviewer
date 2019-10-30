@@ -10,19 +10,79 @@ let options = {
     showShadows: true,
     showTags: true,
     allowRepeat: false,
-    showCell: true,
+    showCell: false,
     wrap: false,
     showLegend: false,
     showOptions: false,
     showUnit: true,
     showBonds: true,
-    radiusScale: 0.8,
+    radiusScale: 0.7,
+    bondScale: 1.5,
     enableZoom: false,
     enablePan: false,
-    enableRotate: false
+    enableRotate: true,
+    translation: [2.5, 2.5, 2.5]
 };
 var viewer = new structureviewer.StructureViewer(targetElem, false, options);
 viewer.loadJSON("data/geometry.json");
+
+// Recolor the bonds
+viewer.bonds.getObjectByName("bond0-2").getObjectByName("fill").material.color.setHex(0x00ff00); // d4
+viewer.bonds.getObjectByName("bond9-11").getObjectByName("fill").material.color.setHex(0x0000ff); // d13
+viewer.bonds.getObjectByName("bond0-5").getObjectByName("fill").material.color.setHex(0xff0000);  // d7
+viewer.bonds.getObjectByName("bond0-9").getObjectByName("fill").material.color.setHex(0x000000); // d11
+viewer.render();
+
+//viewer.bonds.children[6].material.color.setHex(0x000000);  // d11
+//viewer.bonds.children[20].material.color.setHex(0x00ff00);  // d13
+//viewer.bonds.children[4].material.color.setHex(0xff0000);  // d7
+//viewer.bonds.children[2].material.color.setHex(0x0000ff);  // d4
+
+// Define functions for rotating
+function rotated11(angle) {
+
+    // The atoms to rotate
+    let atom9 = viewer.atoms.getObjectByName("atom9");
+    let atom11 = viewer.atoms.getObjectByName("atom11");
+    let atom12 = viewer.atoms.getObjectByName("atom12");
+    let atom10 = viewer.atoms.getObjectByName("atom10");
+
+    // The bonds to rotate
+
+    // Make pivot group: Notice the use of attach instead of add
+    let group = new THREE.Group();
+    let pivotPoint = new THREE.Vector3();
+    atom9.getObjectByName("fill").getWorldPosition(pivotPoint);
+    group.position.copy(pivotPoint);
+    group.attach(atom9);
+    group.attach(atom11);
+    group.attach(atom12);
+    group.attach(atom10);
+    viewer.atoms.attach(group);
+
+    // Get global rotation axis
+    let atom0 = viewer.atoms.getObjectByName("atom0");
+    let axisStart = new THREE.Vector3();
+    atom0.getObjectByName("fill").getWorldPosition(axisStart);
+    let axisEnd = new THREE.Vector3();
+    atom9.getObjectByName("fill").getWorldPosition(axisEnd);
+    console.log(axisEnd);
+    console.log(axisStart);
+    let axis = new THREE.Vector3().subVectors(axisStart, axisEnd).normalize();
+    console.log(axis);
+
+    // Do the rotation
+    group.rotateOnWorldAxis(axis, THREE.Math.degToRad(angle));
+
+    viewer.render();
+}
+
+function rotater( ) {
+  rotated11(1);
+}
+
+setInterval(rotater, 50);
+
 
 var sliders = document.getElementsByClassName("round-slider");
 for (let i = 0; i < sliders.length; i++) {
