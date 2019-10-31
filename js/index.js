@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const structureviewer = require("structureviewer");
 
+//==============================================================================
 // Load the structure viewer
 let targetElem = document.getElementById("viewer-canvas");
 let options = {
@@ -26,64 +27,146 @@ let options = {
 var viewer = new structureviewer.StructureViewer(targetElem, false, options);
 viewer.loadJSON("data/geometry.json");
 
+//==============================================================================
+// Customizing viewer to the BOSS demo
+let atom0 = viewer.atoms.getObjectByName("atom0");
+let atom2 = viewer.atoms.getObjectByName("atom2");
+let atom3 = viewer.atoms.getObjectByName("atom3");
+let atom4 = viewer.atoms.getObjectByName("atom4");
+let atom5 = viewer.atoms.getObjectByName("atom5");
+let atom6 = viewer.atoms.getObjectByName("atom6");
+let atom7 = viewer.atoms.getObjectByName("atom7");
+let atom8 = viewer.atoms.getObjectByName("atom8");
+let atom9 = viewer.atoms.getObjectByName("atom9");
+let atom11 = viewer.atoms.getObjectByName("atom11");
+let atom12 = viewer.atoms.getObjectByName("atom12");
+let atom10 = viewer.atoms.getObjectByName("atom10");
+let bond02 = viewer.bonds.getObjectByName("bond0-2");
+let bond05 = viewer.bonds.getObjectByName("bond0-5");
+let bond09 = viewer.bonds.getObjectByName("bond0-9");
+let bond23 = viewer.bonds.getObjectByName("bond2-3");
+let bond24 = viewer.bonds.getObjectByName("bond2-4");
+let bond56 = viewer.bonds.getObjectByName("bond5-6");
+let bond57 = viewer.bonds.getObjectByName("bond5-7");
+let bond58 = viewer.bonds.getObjectByName("bond5-8");
+let bond911 = viewer.bonds.getObjectByName("bond9-11");
+let bond910 = viewer.bonds.getObjectByName("bond9-10");
+let bond1112 = viewer.bonds.getObjectByName("bond11-12");
+
+// Create groups and place them at the pivot point for easy rotation
+let d11_group = new THREE.Group();
+let d13_group = new THREE.Group();
+let d4_group = new THREE.Group();
+let d7_group = new THREE.Group();
+let d4_pivot = new THREE.Vector3();
+atom2.getObjectByName("fill").getWorldPosition(d4_pivot);
+d4_group.position.copy(d4_pivot);
+let d7_pivot = new THREE.Vector3();
+atom5.getObjectByName("fill").getWorldPosition(d7_pivot);
+d7_group.position.copy(d7_pivot);
+let d13_pivot = new THREE.Vector3();
+atom11.getObjectByName("fill").getWorldPosition(d13_pivot);
+d13_group.position.copy(d13_pivot);
+let d11_pivot = new THREE.Vector3();
+atom9.getObjectByName("fill").getWorldPosition(d11_pivot);
+d11_group.position.copy(d11_pivot);
+d11_group.attach(d13_group);
+viewer.atoms.attach(d11_group);
+viewer.atoms.attach(d4_group);
+viewer.atoms.attach(d7_group);
+
 // Recolor the bonds
-viewer.bonds.getObjectByName("bond0-2").getObjectByName("fill").material.color.setHex(0x00ff00); // d4
-viewer.bonds.getObjectByName("bond9-11").getObjectByName("fill").material.color.setHex(0x0000ff); // d13
-viewer.bonds.getObjectByName("bond0-5").getObjectByName("fill").material.color.setHex(0xff0000);  // d7
-viewer.bonds.getObjectByName("bond0-9").getObjectByName("fill").material.color.setHex(0x000000); // d11
+bond02.getObjectByName("fill").material.color.setHex(0x00ff00);  // d4
+bond911.getObjectByName("fill").material.color.setHex(0x0000ff); // d13
+bond05.getObjectByName("fill").material.color.setHex(0xff0000);  // d7
+bond09.getObjectByName("fill").material.color.setHex(0x000000);  // d11
 viewer.render();
 
-//viewer.bonds.children[6].material.color.setHex(0x000000);  // d11
-//viewer.bonds.children[20].material.color.setHex(0x00ff00);  // d13
-//viewer.bonds.children[4].material.color.setHex(0xff0000);  // d7
-//viewer.bonds.children[2].material.color.setHex(0x0000ff);  // d4
+console.log(viewer.bonds);
 
-// Define functions for rotating
+//==============================================================================
+// d13
+let d13_components = [atom11, atom12, bond1112];
+let d13_axisStart = new THREE.Vector3();
+let d13_axisEnd = new THREE.Vector3();
+atom11.getObjectByName("fill").getWorldPosition(d13_axisStart);
+atom9.getObjectByName("fill").getWorldPosition(d13_axisEnd);
+let d13_axis = new THREE.Vector3().subVectors(d13_axisEnd, d13_axisStart).normalize();
+for (let comp of d13_components) {
+    d13_group.attach(comp);
+}
+function rotated13(angle) {
+    rotate(d13_group, d13_axis, angle);
+}
+
+//==============================================================================
+// d11
+let d11_components = [atom9, atom10, bond911, bond910];
+let d11_axisStart = atom0.getObjectByName("fill").position;
+let d11_axisEnd = atom9.getObjectByName("fill").position;
+//let d11_axisStart = new THREE.Vector3();
+//let d11_axisEnd = new THREE.Vector3();
+//atom0.getObjectByName("fill").getWorldPosition(d11_axisStart);
+//atom9.getObjectByName("fill").getWorldPosition(d11_axisEnd);
+let d11_axis = new THREE.Vector3().subVectors(d11_axisEnd, d11_axisStart).normalize();
+for (let comp of d11_components) {
+    d11_group.attach(comp);
+}
+
 function rotated11(angle) {
+    rotate(d11_group, d11_axis, angle);
+}
 
-    // The atoms to rotate
-    let atom9 = viewer.atoms.getObjectByName("atom9");
-    let atom11 = viewer.atoms.getObjectByName("atom11");
-    let atom12 = viewer.atoms.getObjectByName("atom12");
-    let atom10 = viewer.atoms.getObjectByName("atom10");
+//==============================================================================
+// d7
+let d7_components = [atom5, atom6, atom7, atom8, bond56, bond57, bond58];
+let d7_axisStart = atom0.getObjectByName("fill").position;
+let d7_axisEnd = atom5.getObjectByName("fill").position;
+//let d7_axisStart = new THREE.Vector3();
+//let d7_axisEnd = new THREE.Vector3();
+//atom0.getObjectByName("fill").getWorldPosition(d7_axisStart);
+//atom9.getObjectByName("fill").getWorldPosition(d7_axisEnd);
+let d7_axis = new THREE.Vector3().subVectors(d7_axisEnd, d7_axisStart).normalize();
+for (let comp of d7_components) {
+    d7_group.attach(comp);
+}
 
-    // The bonds to rotate
+function rotated7(angle) {
+    rotate(d7_group, d7_axis, angle);
+}
 
-    // Make pivot group: Notice the use of attach instead of add
-    let group = new THREE.Group();
-    let pivotPoint = new THREE.Vector3();
-    atom9.getObjectByName("fill").getWorldPosition(pivotPoint);
-    group.position.copy(pivotPoint);
-    group.attach(atom9);
-    group.attach(atom11);
-    group.attach(atom12);
-    group.attach(atom10);
-    viewer.atoms.attach(group);
+//==============================================================================
+// d4
+let d4_components = [atom2, atom3, atom4, bond23, bond24];
+let d4_axisStart = atom0.getObjectByName("fill").position;
+let d4_axisEnd = atom2.getObjectByName("fill").position;
+let d4_axis = new THREE.Vector3().subVectors(d4_axisEnd, d4_axisStart).normalize();
+for (let comp of d4_components) {
+    d4_group.attach(comp);
+}
 
-    // Get global rotation axis
-    let atom0 = viewer.atoms.getObjectByName("atom0");
-    let axisStart = new THREE.Vector3();
-    atom0.getObjectByName("fill").getWorldPosition(axisStart);
-    let axisEnd = new THREE.Vector3();
-    atom9.getObjectByName("fill").getWorldPosition(axisEnd);
-    console.log(axisEnd);
-    console.log(axisStart);
-    let axis = new THREE.Vector3().subVectors(axisStart, axisEnd).normalize();
-    console.log(axis);
+function rotated4(angle) {
+    rotate(d4_group, d4_axis, angle);
+}
 
-    // Do the rotation
+//==============================================================================
+// Testing
+function rotate(group, axis, angle) {
     group.rotateOnWorldAxis(axis, THREE.Math.degToRad(angle));
-
     viewer.render();
 }
 
-function rotater( ) {
-  rotated11(1);
+function rotater() {
+    rotated4(1);
+    //rotated13(1);
+    rotated7(1);
+    rotated11(1);
 }
 
 setInterval(rotater, 50);
 
-
+//==============================================================================
+// For setting up the radial sliders
 var sliders = document.getElementsByClassName("round-slider");
 for (let i = 0; i < sliders.length; i++) {
 	sliders[i].addEventListener("click", round_slider_tune, false);
