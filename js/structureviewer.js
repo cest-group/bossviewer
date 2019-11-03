@@ -25,7 +25,6 @@ System.register(["./viewer"], function (exports_1, context_1) {
                         "interstitials": "0xaf8700",
                         "substitutions": "0x0087ff",
                         "outliers": "0x0087ff"
-                        //"outliers": "0xff7e00"
                     };
                     this.elementNames = [
                         'H', 'He', 'Li', 'Be', 'B', 'C', 'N', 'O', 'F', 'Ne', 'Na', 'Mg', 'Al', 'Si',
@@ -296,7 +295,6 @@ System.register(["./viewer"], function (exports_1, context_1) {
                     this.scenes.push(this.sceneStructure);
                     this.sceneInfo = new THREE.Scene();
                     this.scenes.push(this.sceneInfo);
-                    this.setupControlVariables(10);
                 }
                 /**
                  * Used to setup the visualization according to the given options.
@@ -318,6 +316,7 @@ System.register(["./viewer"], function (exports_1, context_1) {
                     this.options["radiusScale"] = opt["radiusScale"] === undefined ? 1 : opt["radiusScale"];
                     this.options["bondScale"] = opt["bondScale"] === undefined ? 1 : opt["bondScale"];
                     this.options["translation"] = opt["translation"] === undefined ? [0, 0, 0] : opt["translation"];
+                    this.options["zoomLevel"] = opt["zoomLevel"] === undefined ? 1 : opt["zoomLevel"];
                     // Handle base class settings
                     super.handleSettings(opt);
                 }
@@ -528,6 +527,8 @@ System.register(["./viewer"], function (exports_1, context_1) {
                     }
                     // Translate the system according to given option
                     this.translate(this.options.translation);
+                    // Zoom according to given option
+                    this.setZoom(this.options.zoomLevel);
                     // Create the vacancy atoms if given
                     this.createVacancies();
                     // Setup element legend and settings
@@ -1474,6 +1475,16 @@ System.register(["./viewer"], function (exports_1, context_1) {
                     let vec = new THREE.Vector3().fromArray(translation);
                     this.atoms.position.add(vec);
                     this.bonds.position.add(vec);
+                    this.render();
+                }
+                /**
+                 * Set the zoom level
+                 *
+                 * @param positions - Positions of the atoms
+                 * @param labels - The element numbers for the atoms
+                 */
+                setZoom(zoomLevel) {
+                    this.camera.zoom = zoomLevel;
                     this.render();
                 }
                 /**

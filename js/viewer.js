@@ -32,13 +32,19 @@ System.register([], function (exports_1, context_1) {
                     this.setupCamera();
                     this.setupControls();
                     this.setupHostElement(hostElement);
-                    //window.addEventListener('resize', this.onWindowResize.bind(this), false);
+                    if (this.options.autoResize) {
+                        window.addEventListener('resize', this.onWindowResize.bind(this), false);
+                    }
                 }
                 handleSettings(opt) {
                     // Controls settings
                     this.options["enableZoom"] = opt["enableZoom"] === undefined ? true : opt["enableZoom"];
                     this.options["enableRotate"] = opt["enableRotate"] === undefined ? true : opt["enableRotate"];
                     this.options["enablePan"] = opt["enablePan"] === undefined ? true : opt["enablePan"];
+                    this.options["panSpeed"] = opt["panSpeed"] === undefined ? 10 : opt["panSpeed"];
+                    this.options["zoomSpeed"] = opt["zoomSpeed"] === undefined ? 2.5 : opt["zoomSpeed"];
+                    this.options["rotateSpeed"] = opt["rotateSpeed"] === undefined ? 2.5 : opt["rotateSpeed"];
+                    this.options["autoResize"] = opt["autoResize"] === undefined ? true : opt["autoResize"];
                 }
                 /**
                  * This function will clear the old view and visualize the new Brilloun
@@ -82,14 +88,6 @@ System.register([], function (exports_1, context_1) {
                  * constructore, like dat.gui settings window.
                  */
                 setupStatic() {
-                }
-                /*
-                 * Used to setup the variables that control the interaction with the system.
-                 */
-                setupControlVariables(panSpeed = 10, zoomSpeed = 2.5, rotateSpeed = 2.5) {
-                    this.panSpeed = panSpeed;
-                    this.zoomSpeed = zoomSpeed;
-                    this.rotateSpeed = rotateSpeed;
                 }
                 /*
                  * Used to setup the scenes. This default implementation will create a
@@ -264,10 +262,9 @@ System.register([], function (exports_1, context_1) {
                  */
                 setupControls() {
                     let controls = new THREE.OrthographicControls(this.camera, this.rootElement);
-                    controls.rotateSpeed = this.rotateSpeed;
-                    controls.zoomSpeed = this.zoomSpeed;
-                    controls.panSpeed = this.panSpeed;
-                    console.log(this.options["enableZoom"]);
+                    controls.rotateSpeed = this.options.rotateSpeed;
+                    controls.zoomSpeed = this.options.zoomSpeed;
+                    controls.panSpeed = this.options.panSpeed;
                     controls.enableZoom = this.options["enableZoom"];
                     controls.enablePan = this.options["enablePan"];
                     controls.enableRotate = this.options["enableRotate"];
@@ -303,7 +300,7 @@ System.register([], function (exports_1, context_1) {
                         this.cornerPoints.localToWorld(screenPos);
                         // Default the zoom to 1 for the projection
                         let oldZoom = this.camera.zoom;
-                        this.camera.zoom = 1;
+                        this.camera.zoom = this.options.zoomLevel;
                         this.camera.updateProjectionMatrix();
                         // Figure out the direction from center
                         let diff = centerPos.sub(screenPos);

@@ -4,7 +4,7 @@ const structureviewer = require("structureviewer");
 
 //==============================================================================
 // Load the structure viewer
-let targetElem = document.getElementById("viewer-canvas");
+let targetElem = document.getElementById("canvas");
 let options = {
     showParam: false,
     showCopies: false,
@@ -22,7 +22,8 @@ let options = {
     enableZoom: false,
     enablePan: false,
     enableRotate: true,
-    translation: [2.5, 2.5, 2.5]
+    translation: [2.5, 2.5, 2.5],
+    zoomLevel: 0.65
 };
 var viewer = new structureviewer.StructureViewer(targetElem, false, options);
 viewer.loadJSON("data/geometry.json");
@@ -104,10 +105,6 @@ function rotated13(angle) {
 let d11_components = [atom9, atom10, bond911, bond910];
 let d11_axisStart = atom0.getObjectByName("fill").position;
 let d11_axisEnd = atom9.getObjectByName("fill").position;
-//let d11_axisStart = new THREE.Vector3();
-//let d11_axisEnd = new THREE.Vector3();
-//atom0.getObjectByName("fill").getWorldPosition(d11_axisStart);
-//atom9.getObjectByName("fill").getWorldPosition(d11_axisEnd);
 let d11_axis = new THREE.Vector3().subVectors(d11_axisEnd, d11_axisStart).normalize();
 for (let comp of d11_components) {
     d11_group.attach(comp);
@@ -122,10 +119,6 @@ function rotated11(angle) {
 let d7_components = [atom5, atom6, atom7, atom8, bond56, bond57, bond58];
 let d7_axisStart = atom0.getObjectByName("fill").position;
 let d7_axisEnd = atom5.getObjectByName("fill").position;
-//let d7_axisStart = new THREE.Vector3();
-//let d7_axisEnd = new THREE.Vector3();
-//atom0.getObjectByName("fill").getWorldPosition(d7_axisStart);
-//atom9.getObjectByName("fill").getWorldPosition(d7_axisEnd);
 let d7_axis = new THREE.Vector3().subVectors(d7_axisEnd, d7_axisStart).normalize();
 for (let comp of d7_components) {
     d7_group.attach(comp);
@@ -158,12 +151,19 @@ function rotate(group, axis, angle) {
 
 function rotater() {
     rotated4(1);
-    //rotated13(1);
+    rotated13(1);
     rotated7(1);
     rotated11(1);
 }
 
 setInterval(rotater, 50);
+
+// Connect linear sliders to viz
+let d11 = document.getElementById("d11");
+d11.onchange = function() {
+    d11val.innerHTML = this.value;
+}
+
 
 //==============================================================================
 // For setting up the radial sliders

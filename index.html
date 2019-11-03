@@ -16,28 +16,43 @@
     <body>
         <div class="container">
 
-            <!--Linear sliders-->
-            <!--<div class="slidecontainer">-->
-                <!--<h1>Linear slider</h1>-->
-                <!--<input type="range" min="1" max="100" value="50" class="slider" id="myRange">-->
-            <!--</div>-->
 
             <!--Scoreboard-->
             <div id="scoreboard" class="sidebar">
                 <h1>Scoreboard</h1>
+                <ol>
+                    <li>BOSS: 20 ms</li>
+                    <li>Jari: 25 ms</li>
+                    <li>Patrick: 25 ms</li>
+                </ol>
             </div>
 
             <!--Viewer canvas-->
             <div id="viewer-canvas">
+                <div id="canvas"></div>
             </div>
 
+            <div id="energies">
+                <div id="energy">Energy: <span id="energy-value">X</span> eV</div>
+                <div id="min-energy">Your minimum: <span id="min-energy-value">X</span> eV</div>
+            </div>
+
+
             <!--Sliders-->
-            <div id="slidecontainer" class="sidebar">
+            <div id="parameters" class="sidebar">
                 <h1>Parameters</h1>
-                <div class="round-slider" style="background-image: url('img/knob.png'); background-position: center; background-size: cover;"></div>
-                <div class="round-slider" style="background-image: url('img/knob.png'); background-position: center; background-size: cover;"></div>
-                <div class="round-slider" style="background-image: url('img/knob.png'); background-position: center; background-size: cover;"></div>
-                <div class="round-slider" style="background-image: url('img/knob.png'); background-position: center; background-size: cover;"></div>
+            </div>
+
+            <!--Linear sliders-->
+            <div class="slidecontainer">
+                <div class="sliderholder">
+                    <p>0°</p>
+                    <input type="range" min="0" max="360" step="10" value="0" class="slider" id="d11">
+                    <p>360°</p>
+                </div>
+                <input type="range" min="0" max="360" value="0" class="slider" id="d13">
+                <input type="range" min="0" max="360" value="0" class="slider" id="d7">
+                <input type="range" min="0" max="360" value="0" class="slider" id="d4">
             </div>
         </div>
 
