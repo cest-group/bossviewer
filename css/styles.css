@@ -121,7 +121,7 @@ h1 {
 }
 
 #d13::-moz-range-thumb {
-  background: green;
+  background: blue;
 }
 
 #d11::-moz-range-thumb {
@@ -133,7 +133,7 @@ h1 {
 }
 
 #d4::-moz-range-thumb {
-  background: blue;
+  background: green;
 }
 
 /* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
