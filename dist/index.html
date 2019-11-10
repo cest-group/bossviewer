@@ -5,17 +5,9 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <link rel="stylesheet" href="css/styles.css?v=1.0">
-        <script src="js/rafpolyfill.js"></script>
-        <script src="js/three.min.js"></script>
-        <script src="js/Projector.js"></script>
-        <script src="js/CanvasRenderer.js"></script>
-        <script src="js/system.js"></script>
-        <script src="js/orthographiccontrols.js"></script>
-        <script src="js/dat.gui.min.js"></script>
     </head>
     <body>
         <div class="container">
-
 
             <!--Scoreboard-->
             <div id="scoreboard" class="sidebar">
@@ -65,22 +57,14 @@
                     <input type="range" min="0" max="360" step="10" value="0" class="slider" id="d4">
                     <p>360°</p>
                 </div>
-                <!--<input type="range" min="0" max="360" value="0" class="slider" id="d7">-->
-                <!--<input type="range" min="0" max="360" value="0" class="slider" id="d4">-->
             </div>
         </div>
 
-        <!--Using system.js to enable modules in JavaScript.-->
-        <script>
-        System.config({
-            baseURL: './js',
-            packages: {
-                '.': {
-                    defaultExtensions: 'js'
-                }
-            },
-        });
-        System.import('index.js');
-        </script>
+        <!--Load here to not block UI-->
+        <script src="js/rafpolyfill.js"></script>
+        <script src="js/three.min.js"></script>
+        <script src="js/orthographiccontrols.js"></script>
+        <script src="js/dat.gui.min.js"></script>
+        <script src="js/main.js"></script>
     </body>
 </html>

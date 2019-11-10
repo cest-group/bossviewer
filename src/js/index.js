@@ -1,6 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const structureviewer = require("structureviewer");
+import { StructureViewer } from './structureviewer.js';
 
 //==============================================================================
 // Load the structure viewer
@@ -23,10 +21,16 @@ let options = {
     enablePan: false,
     enableRotate: true,
     translation: [2.5, 2.5, 2.5],
-    zoomLevel: 0.6
+    zoomLevel: 0.5
 };
-var viewer = new structureviewer.StructureViewer(targetElem, false, options);
-viewer.loadJSON("data/geometry.json");
+var viewer = new StructureViewer(targetElem, options);
+let structure = {
+  "chemicalSymbols": ["C", "H", "N", "H", "H", "C", "H", "H", "H", "C", "O", "O", "H"],
+  "positions": [[0.0, 0.0, 0.0], [1.093, 0.0, 0.0], [-0.47961, 0.0, -1.41207], [0.00368, 0.74067, -1.92165], [-0.27254, -0.90586, -1.8276], [-0.49584, 1.26211, 0.72868], [0.00433, 1.36621, 1.69437], [-0.28718, 2.15346, 0.13243], [-1.57317, 1.20464, 0.90078], [-0.39425, -1.28861, 0.74398], [0.0333, -2.39527, 0.51648], [-1.26289, -1.14965, 1.6942], [-0.83779, -0.41541, 2.16871]],
+  "cell": [[5.0, 0.0, 0.0], [0, 5.0, 0.0], [0.0, 0.0, 5.0]]
+};
+viewer.load(structure);
+//viewer.loadJSON("/home/lauri/repositories/bossviewer/dist/data/geometry.json");
 
 //==============================================================================
 // Customizing viewer to the BOSS demo
@@ -156,8 +160,7 @@ function rotater() {
     rotated11(1);
 }
 
-//setInterval(rotater, 50);
-
+//==============================================================================
 // Connect linear sliders to viz
 let d11 = document.getElementById("d11");
 var d11angle = 0;
@@ -192,57 +195,5 @@ d4.oninput = function() {
     let angle = this.value;
     let newangle = angle-d4angle;
     rotated4(newangle);
-    console.log(angle, newangle);
     d4angle = angle;
 };
-
-
-//==============================================================================
-// For setting up the radial sliders
-//var sliders = document.getElementsByClassName("round-slider");
-//for (let i = 0; i < sliders.length; i++) {
-	//sliders[i].addEventListener("click", round_slider_tune, false);
-	//sliders[i].addEventListener("mousedown", function(event) {
-		//sliders[i].onmousemove = function(event) {
-			//if (event.buttons == 1 || event.buttons == 3) {
-				//round_slider_tune(event);
-			//}
-		//}
-	//});
-//}
-
-//function round_slider_tune(event) {
-	//let eventDoc = (event.target && event.target.ownerDocument) || document,
-		//doc = eventDoc.documentElement,
-		//body = eventDoc.body;
-	//event.pageX = event.clientX +
-		  //(doc && doc.scrollLeft || body && body.scrollLeft || 0) -
-		  //(doc && doc.clientLeft || body && body.clientLeft || 0);
-	//event.pageY = event.clientY +
-		  //(doc && doc.scrollTop  || body && body.scrollTop  || 0) -
-		  //(doc && doc.clientTop  || body && body.clientTop  || 0 );
-	//let output = event.target.getElementsByClassName("selection")[0],
-		//text = event.target.getElementsByClassName("holder")[0],
-		//styleafter = document.head.appendChild(document.createElement("style")),
-		//elpos = event.target.getBoundingClientRect(),
-		//cX = elpos.width / 2,
-		//cY = elpos.height / 2,
-		//eX = event.pageX - elpos.left,
-		//eY = event.pageY - elpos.top,
-		//dX = 0,
-		//dY = 0,
-		//angle = Math.atan2(cX - eX, cY - eY) * (180 / Math.PI),
-		//value = 100;
-
-	//if (Math.abs(eX - cX) >= Math.abs(eY - cY)) { // 110 90
-		//dX = 150 / 2 + Math.sign(eX - cX) * 150 / 2;
-		//dY = 150 / 2 + (eY - cY) / Math.abs(eX - cX) * 150 / 2;
-	//} else {
-		//dX = 150 / 2 + (eX - cX) / Math.abs(eY - cY) * 150 / 2;
-		//dY = 150 / 2 + Math.sign(eY - cY) * 150 / 2;
-	//}
-	//dX = Math.round(dX / 150 * 100)
-	//dY = Math.round(dY / 150 * 100)
-	//styleafter.innerHTML = ".round-slider {transform: rotate(" + -angle + "deg);}";
-	//text.innerHTML = value + "%";
-//}
