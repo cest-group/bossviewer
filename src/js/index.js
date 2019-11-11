@@ -1,5 +1,8 @@
 import { StructureViewer } from './structureviewer.js';
 
+// Hide load message after page load
+window.onload = function(){ document.getElementById("loadscreen").style.display = "none"};
+
 //==============================================================================
 // Load the structure viewer
 let targetElem = document.getElementById("canvas");
@@ -24,13 +27,7 @@ let options = {
     zoomLevel: 0.5
 };
 var viewer = new StructureViewer(targetElem, options);
-let structure = {
-  "chemicalSymbols": ["C", "H", "N", "H", "H", "C", "H", "H", "H", "C", "O", "O", "H"],
-  "positions": [[0.0, 0.0, 0.0], [1.093, 0.0, 0.0], [-0.47961, 0.0, -1.41207], [0.00368, 0.74067, -1.92165], [-0.27254, -0.90586, -1.8276], [-0.49584, 1.26211, 0.72868], [0.00433, 1.36621, 1.69437], [-0.28718, 2.15346, 0.13243], [-1.57317, 1.20464, 0.90078], [-0.39425, -1.28861, 0.74398], [0.0333, -2.39527, 0.51648], [-1.26289, -1.14965, 1.6942], [-0.83779, -0.41541, 2.16871]],
-  "cell": [[5.0, 0.0, 0.0], [0, 5.0, 0.0], [0.0, 0.0, 5.0]]
-};
-viewer.load(structure);
-//viewer.loadJSON("/home/lauri/repositories/bossviewer/dist/data/geometry.json");
+viewer.load(STRUCTURE);
 
 //==============================================================================
 // Customizing viewer to the BOSS demo
@@ -162,38 +159,89 @@ function rotater() {
 
 //==============================================================================
 // Connect linear sliders to viz
+let energyValue = document.getElementById("energy-value");
+let energyMinValue = document.getElementById("energy-min-value");
+let energyKnob = document.getElementById("energy-slider-knob");
+let energyMinKnob = document.getElementById("energy-slider-min-knob");
+let angleStep = 10;
+let energyIndices = [];
+for (let i=0; i < 36; ++i) {
+    energyIndices.push(i);
+};
+energyIndices.push(0);
+let d11_index = 0;
+let d13_index = 0;
+let d7_index = 0;
+let d4_index = 0;
+
+// It is a bit annoying to get the min and max values with JS, so these
+// hardcoded values are from python
+const maxEnergy = 45.508;
+const minEnergy = 15.573;
+let userMinEnergy = maxEnergy;
+
+function updateEnergy(id4, id7, id11, id13) {
+
+    // Update text
+    let energy = ENERGIES[id4][id7][id11][id13][4];
+    energyValue.innerHTML = energy.toFixed(2);
+
+    // Update current energy
+    let pos = (energy-minEnergy)/(maxEnergy-minEnergy)*100;
+    energyKnob.style.left = pos + "%";
+    console.log(energyKnob.style.left);
+
+    // Update best energy
+    if (energy < userMinEnergy) {
+        let pos = (energy-minEnergy)/(maxEnergy-minEnergy)*100;
+        energyMinKnob.style.left = pos + "%";
+        console.log(energyMinKnob.style.left);
+        userMinEnergy = energy;
+
+        // Update text
+        energyMinValue.innerHTML = userMinEnergy.toFixed(2);
+    }
+}
+updateEnergy(d4_index, d7_index, d11_index, d13_index);
+
 let d11 = document.getElementById("d11");
 var d11angle = 0;
 d11.oninput = function() {
-    let angle = this.value;
+    d11_index = energyIndices[this.value];
+    let angle = d11_index*angleStep;
     let newangle = angle-d11angle;
     rotated11(newangle);
-    console.log(angle, newangle);
     d11angle = angle;
+    updateEnergy(d4_index, d7_index, d11_index, d13_index);
+
 };
 let d13 = document.getElementById("d13");
 var d13angle = 0;
 d13.oninput = function() {
-    let angle = this.value;
+    d13_index = energyIndices[this.value];
+    let angle = -d13_index*angleStep;
     let newangle = angle-d13angle;
     rotated13(newangle);
-    console.log(angle, newangle);
     d13angle = angle;
+    updateEnergy(d4_index, d7_index, d11_index, d13_index);
 };
 let d7 = document.getElementById("d7");
 var d7angle = 0;
 d7.oninput = function() {
-    let angle = this.value;
+    d7_index = energyIndices[this.value];
+    let angle = d7_index*angleStep;
     let newangle = angle-d7angle;
     rotated7(newangle);
-    console.log(angle, newangle);
     d7angle = angle;
+    updateEnergy(d4_index, d7_index, d11_index, d13_index);
 };
 let d4 = document.getElementById("d4");
 var d4angle = 0;
 d4.oninput = function() {
-    let angle = this.value;
+    d4_index = energyIndices[this.value];
+    let angle = d4_index*angleStep;
     let newangle = angle-d4angle;
     rotated4(newangle);
     d4angle = angle;
+    updateEnergy(d4_index, d7_index, d11_index, d13_index);
 };

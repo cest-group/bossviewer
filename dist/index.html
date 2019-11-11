@@ -24,9 +24,39 @@
                 <div id="canvas"></div>
             </div>
 
+            <div id="loadscreen">
+                <div>Loading</div>
+                <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+            </div>
+
             <div id="energies">
-                <div id="energy">Energy: <span id="energy-value">X</span> eV</div>
-                <div id="min-energy">Your minimum: <span id="min-energy-value">X</span> eV</div>
+                <div id="energy">
+                    <div>Energy:</div>
+                    <div id="energy-value">X</div>
+                    <div>kcal/mol</div>
+                </div>
+                <!--<div id="min-energy">Your minimum: <span id="min-energy-value">X</span> eV</div>-->
+                <div id="energy-slider">
+                    <div class="energy-slider-end-bar"></div>
+                    <div id="energy-slider-middle-bar">
+                        <div class="energy-slider-range">
+                            <div class="energy-slider-knob-holder">
+                                <div id="energy-slider-knob"></div>
+                            </div>
+                        </div>
+                        <div class="energy-slider-range">
+                            <div class="energy-slider-knob-holder">
+                                <div id="energy-slider-min-knob"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="energy-slider-end-bar"></div>
+                </div>
+                <div id="min-energy">
+                    <div>Your minimum:</div>
+                    <div id="energy-min-value">X</div>
+                    <div>kcal/mol</div>
+                </div>
             </div>
 
 
@@ -39,22 +69,22 @@
             <div class="slidecontainer">
                 <div class="sliderholder">
                     <p>0°</p>
-                    <input type="range" min="0" max="360" step="10" value="0" class="slider" id="d11">
+                    <input type="range" min="0" max="36" step="1" value="0" class="slider" id="d11">
                     <p>360°</p>
                 </div>
                 <div class="sliderholder">
                     <p>0°</p>
-                    <input type="range" min="0" max="360" step="10" value="0" class="slider" id="d13">
+                    <input type="range" min="0" max="36" step="1" value="0" class="slider" id="d13">
                     <p>360°</p>
                 </div>
                 <div class="sliderholder">
                     <p>0°</p>
-                    <input type="range" min="0" max="360" step="10" value="0" class="slider" id="d7">
+                    <input type="range" min="0" max="36" step="1" value="0" class="slider" id="d7">
                     <p>360°</p>
                 </div>
                 <div class="sliderholder">
                     <p>0°</p>
-                    <input type="range" min="0" max="360" step="10" value="0" class="slider" id="d4">
+                    <input type="range" min="0" max="36" step="1" value="0" class="slider" id="d4">
                     <p>360°</p>
                 </div>
             </div>
@@ -65,6 +95,8 @@
         <script src="js/three.min.js"></script>
         <script src="js/orthographiccontrols.js"></script>
         <script src="js/dat.gui.min.js"></script>
+        <script src="data/geometry.js"></script>
+        <script src="data/energies.js"></script>
         <script src="js/main.js"></script>
     </body>
 </html>

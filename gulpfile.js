@@ -28,7 +28,8 @@ gulp.task('webpack', function(done) {
 gulp.task('sass', function() {
     return gulp.src("src/css/*.scss")
         .pipe(sass())
-        .pipe(gulp.dest("dist/css"));
+        .pipe(gulp.dest("dist/css"))
+        .pipe(browserSync.stream());
 });
 
 // Build task
