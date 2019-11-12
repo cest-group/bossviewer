@@ -30,7 +30,7 @@ body {
     color: #eee;
     height: 100%;
     width: 100%;
-    background: #360033;  /* fallback for old browsers */
+    background: #0b8793;  /* fallback for old browsers */
     background: radial-gradient(#0b8793, #1a3c54);
 }
 
@@ -100,14 +100,6 @@ h1 {
   margin-left: 1rem;
 }
 
-#min-energy {
-  display: flex;
-  font-size: 2.5rem;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-}
-
 #energy-slider {
   margin-top: 0.5rem;
   display: flex;
@@ -163,11 +155,13 @@ h1 {
 }
 
 #min-energy {
+  color: orange;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
   margin-top: 0.5rem;
   font-size: 2rem;
-  color: #222;
-  width: 100%;
-  text-align: center;
 }
 
 #scoreboard ol li {

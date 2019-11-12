@@ -5,7 +5,7 @@ body {
   color: #eee;
   height: 100%;
   width: 100%;
-  background: #360033;
+  background: #0b8793;
   /* fallback for old browsers */
   background: radial-gradient(#0b8793, #1a3c54); }
 
@@ -64,13 +64,6 @@ h1 {
 #min-energy div {
   margin-left: 1rem; }
 
-#min-energy {
-  display: flex;
-  font-size: 2.5rem;
-  width: 100%;
-  justify-content: center;
-  align-items: center; }
-
 #energy-slider {
   margin-top: 0.5rem;
   display: flex;
@@ -123,11 +116,13 @@ h1 {
   box-shadow: 0 0 10px #000; }
 
 #min-energy {
-  margin-top: 0.5rem;
-  font-size: 2rem;
-  color: #222;
+  color: orange;
+  display: flex;
   width: 100%;
-  text-align: center; }
+  justify-content: center;
+  align-items: center;
+  margin-top: 0.5rem;
+  font-size: 2rem; }
 
 #scoreboard ol li {
   font-size: 1.5rem; }
