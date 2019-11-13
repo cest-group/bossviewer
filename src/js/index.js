@@ -84,8 +84,6 @@ bond05.getObjectByName("fill").material.color.setHex(0xff0000);  // d7
 bond09.getObjectByName("fill").material.color.setHex(0x000000);  // d11
 viewer.render();
 
-console.log(viewer.bonds);
-
 //==============================================================================
 // d13
 let d13_components = [atom11, atom12, bond1112];
@@ -176,8 +174,8 @@ let d4_index = 0;
 
 // It is a bit annoying to get the min and max values with JS, so these
 // hardcoded values are from python
-const maxEnergy = 45.508;
-const minEnergy = 15.573;
+const maxEnergy = 49.697;
+const minEnergy = 14.905;
 let userMinEnergy = maxEnergy;
 
 function updateEnergy(id4, id7, id11, id13) {
@@ -189,18 +187,19 @@ function updateEnergy(id4, id7, id11, id13) {
     // Update current energy
     let pos = (energy-minEnergy)/(maxEnergy-minEnergy)*100;
     energyKnob.style.left = pos + "%";
-    console.log(energyKnob.style.left);
 
     // Update best energy
     if (energy < userMinEnergy) {
-        let pos = (energy-minEnergy)/(maxEnergy-minEnergy)*100;
-        energyMinKnob.style.left = pos + "%";
-        console.log(energyMinKnob.style.left);
-        userMinEnergy = energy;
-
-        // Update text
-        energyMinValue.innerHTML = userMinEnergy.toFixed(2);
+        updateMinEnergy(energy);
     }
+}
+function updateMinEnergy(energy) {
+    let pos = (energy-minEnergy)/(maxEnergy-minEnergy)*100;
+    energyMinKnob.style.left = pos + "%";
+    userMinEnergy = energy;
+
+    // Update text
+    energyMinValue.innerHTML = userMinEnergy.toFixed(2);
 }
 updateEnergy(d4_index, d7_index, d11_index, d13_index);
 
@@ -244,4 +243,17 @@ d4.oninput = function() {
     rotated4(newangle);
     d4angle = angle;
     updateEnergy(d4_index, d7_index, d11_index, d13_index);
+};
+
+let reset = document.getElementById("reset");
+reset.onclick = function() {
+    d4.value = "0";
+    d4.oninput();
+    d7.value = "0";
+    d7.oninput();
+    d11.value = "0";
+    d11.oninput();
+    d13.value = "0";
+    d13.oninput();
+    updateMinEnergy(ENERGIES[0][0][0][0][4]);
 };

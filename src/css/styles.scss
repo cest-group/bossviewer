@@ -1,6 +1,16 @@
 // Imports
 @import 'normalize.css';
 
+//html {
+  //-webkit-touch-callout: none; [> iOS Safari <]
+    //-webkit-user-select: none; [> Safari <]
+     //-khtml-user-select: none; [> Konqueror HTML <]
+       //-moz-user-select: none; [> Old versions of Firefox <]
+        //-ms-user-select: none; [> Internet Explorer/Edge <]
+            //user-select: none; [> Non-prefixed version, currently
+                                  //supported by Chrome, Opera and Firefox */
+//}
+
 // Variables
 $slider-height: 4rem;
 $slider-width: 4rem;
@@ -23,6 +33,18 @@ $energy-slider-knob-size: 1rem;
     -moz-box-shadow: $top $left $blur $color;
     box-shadow: $top $left $blur $color;
   }
+}
+
+@mixin button($color) {
+  cursor: pointer; /* Cursor on hover */
+  border-radius: $slider-width;
+  outline: none;
+  border: 5px solid rgba(255,255,255,0.3);
+  background: radial-gradient(lighten($color, 10), $color);
+  &:active {
+    transform: scale(0.95);
+  }
+  @include box-shadow(0, 0, 20px, #111);
 }
 
 body {
@@ -85,6 +107,28 @@ h1 {
   left: 30%;
 }
 
+#reset-holder {
+  position: fixed;
+  bottom: 3rem;
+  right: 3rem;
+  z-index: 150;
+}
+
+#reset {
+  width: 10rem;
+  height: 4rem;
+  text-align: center;
+  font-size: 2rem;
+  color: white;
+  vertical-align: middle;
+  @include button(darken(orange,10));
+}
+#reset-text {
+  position: relative;
+  top: 50%;
+  transform: translateY(-55%);
+}
+
 #energy {
   display: flex;
   font-size: 2.5rem;
@@ -134,7 +178,6 @@ h1 {
   width: $energy-slider-knob-size;
   background-color: orange;
   border-radius: $energy-slider-knob-size;
-  @include box-shadow(0, 0, 10px, #000);
 }
 
 .energy-slider-knob-holder {
@@ -151,7 +194,6 @@ h1 {
   width: $energy-slider-knob-size;
   background-color: white;
   border-radius: $energy-slider-knob-size;
-  @include box-shadow(0, 0, 10px, #000);
 }
 
 #min-energy {
@@ -215,36 +257,27 @@ h1 {
 }
 
 #d13::-moz-range-thumb {
-  background: blue;
+  @include button(blue);
 }
 #d11::-moz-range-thumb {
-  background: black;
+  @include button(black);
 }
 #d7::-moz-range-thumb {
-  background: red;
+  @include button(red);
 }
 #d4::-moz-range-thumb {
-  background: green;
+  @include button(green);
 }
 
 /* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
 .slider::-webkit-slider-thumb {
   width: $slider-width; /* Set a specific slider handle width */
   height: $slider-height; /* Slider handle height */
-  background: $slider-color; /* Green background */
-  cursor: pointer; /* Cursor on hover */
-  border-radius: $slider-width;
-  @include box-shadow(0, 0, 10px, #000);
-
 }
 
 .slider::-moz-range-thumb {
   width: $slider-width; /* Set a specific slider handle width */
   height: $slider-height; /* Slider handle height */
-  background: $slider-color; /* Green background */
-  cursor: pointer; /* Cursor on hover */
-  border-radius: $slider-width;
-  @include box-shadow(0, 0, 10px, #000);
 }
 
 .round-slider {

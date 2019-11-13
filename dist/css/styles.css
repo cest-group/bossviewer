@@ -52,6 +52,36 @@ h1 {
   bottom: 0rem;
   left: 30%; }
 
+#reset-holder {
+  position: fixed;
+  bottom: 3rem;
+  right: 3rem;
+  z-index: 150; }
+
+#reset {
+  width: 10rem;
+  height: 4rem;
+  text-align: center;
+  font-size: 2rem;
+  color: white;
+  vertical-align: middle;
+  cursor: pointer;
+  /* Cursor on hover */
+  border-radius: 4rem;
+  outline: none;
+  border: 5px solid rgba(255, 255, 255, 0.3);
+  background: radial-gradient(orange, #cc8400);
+  -webkit-box-shadow: 0 0 20px #111;
+  -moz-box-shadow: 0 0 20px #111;
+  box-shadow: 0 0 20px #111; }
+  #reset:active {
+    transform: scale(0.95); }
+
+#reset-text {
+  position: relative;
+  top: 50%;
+  transform: translateY(-55%); }
+
 #energy {
   display: flex;
   font-size: 2.5rem;
@@ -93,10 +123,7 @@ h1 {
   height: 1rem;
   width: 1rem;
   background-color: orange;
-  border-radius: 1rem;
-  -webkit-box-shadow: 0 0 10px #000;
-  -moz-box-shadow: 0 0 10px #000;
-  box-shadow: 0 0 10px #000; }
+  border-radius: 1rem; }
 
 .energy-slider-knob-holder {
   position: relative;
@@ -110,10 +137,7 @@ h1 {
   height: 1rem;
   width: 1rem;
   background-color: white;
-  border-radius: 1rem;
-  -webkit-box-shadow: 0 0 10px #000;
-  -moz-box-shadow: 0 0 10px #000;
-  box-shadow: 0 0 10px #000; }
+  border-radius: 1rem; }
 
 #min-energy {
   color: orange;
@@ -173,45 +197,69 @@ h1 {
   /* Grey background */ }
 
 #d13::-moz-range-thumb {
-  background: blue; }
+  cursor: pointer;
+  /* Cursor on hover */
+  border-radius: 4rem;
+  outline: none;
+  border: 5px solid rgba(255, 255, 255, 0.3);
+  background: radial-gradient(#3333ff, blue);
+  -webkit-box-shadow: 0 0 20px #111;
+  -moz-box-shadow: 0 0 20px #111;
+  box-shadow: 0 0 20px #111; }
+  #d13::-moz-range-thumb:active {
+    transform: scale(0.95); }
 
 #d11::-moz-range-thumb {
-  background: black; }
+  cursor: pointer;
+  /* Cursor on hover */
+  border-radius: 4rem;
+  outline: none;
+  border: 5px solid rgba(255, 255, 255, 0.3);
+  background: radial-gradient(#1a1a1a, black);
+  -webkit-box-shadow: 0 0 20px #111;
+  -moz-box-shadow: 0 0 20px #111;
+  box-shadow: 0 0 20px #111; }
+  #d11::-moz-range-thumb:active {
+    transform: scale(0.95); }
 
 #d7::-moz-range-thumb {
-  background: red; }
+  cursor: pointer;
+  /* Cursor on hover */
+  border-radius: 4rem;
+  outline: none;
+  border: 5px solid rgba(255, 255, 255, 0.3);
+  background: radial-gradient(#ff3333, red);
+  -webkit-box-shadow: 0 0 20px #111;
+  -moz-box-shadow: 0 0 20px #111;
+  box-shadow: 0 0 20px #111; }
+  #d7::-moz-range-thumb:active {
+    transform: scale(0.95); }
 
 #d4::-moz-range-thumb {
-  background: green; }
+  cursor: pointer;
+  /* Cursor on hover */
+  border-radius: 4rem;
+  outline: none;
+  border: 5px solid rgba(255, 255, 255, 0.3);
+  background: radial-gradient(#00b300, green);
+  -webkit-box-shadow: 0 0 20px #111;
+  -moz-box-shadow: 0 0 20px #111;
+  box-shadow: 0 0 20px #111; }
+  #d4::-moz-range-thumb:active {
+    transform: scale(0.95); }
 
 /* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
 .slider::-webkit-slider-thumb {
   width: 4rem;
   /* Set a specific slider handle width */
   height: 4rem;
-  /* Slider handle height */
-  background: #444;
-  /* Green background */
-  cursor: pointer;
-  /* Cursor on hover */
-  border-radius: 4rem;
-  -webkit-box-shadow: 0 0 10px #000;
-  -moz-box-shadow: 0 0 10px #000;
-  box-shadow: 0 0 10px #000; }
+  /* Slider handle height */ }
 
 .slider::-moz-range-thumb {
   width: 4rem;
   /* Set a specific slider handle width */
   height: 4rem;
-  /* Slider handle height */
-  background: #444;
-  /* Green background */
-  cursor: pointer;
-  /* Cursor on hover */
-  border-radius: 4rem;
-  -webkit-box-shadow: 0 0 10px #000;
-  -moz-box-shadow: 0 0 10px #000;
-  box-shadow: 0 0 10px #000; }
+  /* Slider handle height */ }
 
 .round-slider {
   align-self: center;
