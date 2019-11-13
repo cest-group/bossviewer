@@ -7,16 +7,47 @@
         <link rel="stylesheet" href="css/styles.css?v=1.0">
     </head>
     <body>
-        <div class="container">
+        <div class="cont">
 
             <!--Scoreboard-->
-            <div id="scoreboard" class="sidebar">
-                <h1>Scoreboard</h1>
-                <ol>
-                    <li>BOSS: 20 ms</li>
-                    <li>Jari: 25 ms</li>
-                    <li>Patrick: 25 ms</li>
-                </ol>
+            <div id="buttons">
+                <section class="hero is-success">
+                    <div class="hero-body">
+                        <div class="container has-text-centered">
+                            <h1 class="title">
+                                Can you beat the BOSS?
+                            </h1>
+                        </div>
+                    </div>
+                    <div class="hero-foot">
+                        <nav class="tabs is-boxed is-fullwidth">
+                            <div class="container">
+                                <ul>
+                                    <li id="tab1" class="tab is-active"><a>The Task</a></li>
+                                    <li id="tab2" class="tab"><a>What is BOSS?</a></li>
+                                    <li id="tab3" class="tab"><a>About Us</a></li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                </section>
+                <div class="container section">
+                    <div id="tab1-content" class="content-tab" >
+                    <p>
+                        test1<br>
+                    Overview Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                    </div>
+                    <div id="tab2-content" class="content-tab" style="display:none">
+                        <p>
+                        test2<br>
+                        Details Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                    </div>
+                    <div id="tab3-content" class="content-tab" style="display:none">
+                    <p>
+                        test3 <br>
+                    Specification Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                    </div>
+                </div>
             </div>
 
             <!--Viewer canvas-->
@@ -28,6 +59,7 @@
                 <div>Loading</div>
                 <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
             </div>
+
 
             <div id="energies">
                 <div id="energy">

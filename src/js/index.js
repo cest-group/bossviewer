@@ -1,7 +1,12 @@
 import { StructureViewer } from './structureviewer.js';
 
 // Hide load message after page load
-window.onload = function(){ document.getElementById("loadscreen").style.display = "none"};
+window.onload = function(){
+    document.getElementById("loadscreen").style.display = "none";
+    document.getElementById("tab1").onclick = function() {openTab('tab1-content');};
+    document.getElementById("tab2").onclick = function() {openTab('tab2-content');};
+    document.getElementById("tab3").onclick = function() {openTab('tab3-content');};
+};
 
 //==============================================================================
 // Load the structure viewer
@@ -256,4 +261,21 @@ reset.onclick = function() {
     d13.value = "0";
     d13.oninput();
     updateMinEnergy(ENERGIES[0][0][0][0][4]);
+    viewer.controls.reset();
 };
+
+function openTab(tabName) {
+  console.log("Click");
+  var i, x, tablinks;
+  x = document.getElementsByClassName("content-tab");
+  for (i = 0; i < x.length; i++) {
+      x[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tab");
+  for (i = 0; i < x.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" is-active", "");
+  }
+  document.getElementById(tabName).style.display = "block";
+  event.currentTarget.className += " is-active";
+}
+
