@@ -9,45 +9,49 @@
     <body>
         <div class="cont">
 
-            <!--Scoreboard-->
-            <div id="buttons">
-                <section class="hero is-success">
-                    <div class="hero-body">
-                        <div class="container has-text-centered">
-                            <h1 class="title">
-                                Can you beat the BOSS?
-                            </h1>
-                        </div>
-                    </div>
-                    <div class="hero-foot">
-                        <nav class="tabs is-boxed is-fullwidth">
-                            <div class="container">
-                                <ul>
-                                    <li id="tab1" class="tab is-active"><a>The Task</a></li>
-                                    <li id="tab2" class="tab"><a>What is BOSS?</a></li>
-                                    <li id="tab3" class="tab"><a>About Us</a></li>
-                                </ul>
-                            </div>
-                        </nav>
-                    </div>
-                </section>
-                <div class="container section">
+            <!--Buttons-->
+            <div id="header">
+                <div id="tab1" class="tab is-active mybutton">
+                    <div>Info</div>
+                </div>
+                <div id="tab2" class="tab mybutton">
+                    <div>Alanine</div>
+                </div>
+                <div id="tab3" class="tab mybutton">
+                    <div>Hints</div>
+                </div>
+                <div id="tab4" class="tab mybutton">
+                    <div>BOSS AI</div>
+                </div>
+                <div id="tab5" class="tab mybutton">
+                    <div>Our team</div>
+                </div>
+            </div>
+
+            <!--Info-->
+            <div id="info">
+                <div>
                     <div id="tab1-content" class="content-tab" >
-                    <p>
-                        test1<br>
-                    Overview Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                        <p>Understanding the structure of materials can help us study and refine their technological properties, but configurational structure search is difficult. Too many simulations are needed to solve the problem, and the solution is not easy to guess. Here, you can do your own configuration search on the example of a small molecule - alanine. Build your own physical model of alanine and try to rotate bonds like on the screen.</p>
                     </div>
                     <div id="tab2-content" class="content-tab" style="display:none">
-                        <p>
-                        test2<br>
-                        Details Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                        <p>Alanine molecule is a tiny amino-acid, the smallest component of proteins. It was found to have 13 conformers: different molecule shapes formed by bond rotations. The most likely form of alanine in nature is the conformer with the lowest internal energy E. Can you find which one it is by playing the energy game? Move the bond rotation sliders until you find the structure with the lowest energy.</p>
                     </div>
                     <div id="tab3-content" class="content-tab" style="display:none">
-                    <p>
-                        test3 <br>
-                    Specification Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                        <p>Different parts of alanine molecule interact with each other via electrostatics and hydrogen bonding (e.g. N+, O-). When the interactions are favorable, the internal energy of the molecule is lowered.</p>
+                    </div>
+                    <div id="tab4-content" class="content-tab" style="display:none">
+                        <p>BOSS is an AI that relies on Bayesian Optimization method to perform configurational structure search of materials. It learns by watching, just like a child. The more structures it sees, the better it can predict which configurations have the lowest energy, and are the most likely found in nature. BOSS is far more efficient than humans in identifying the most stable forms of matter.</p>
+                    </div>
+                    <div id="tab5-content" class="content-tab" style="display:none">
+                        <p>To be filled</p>
                     </div>
                 </div>
+            </div>
+
+            <div id="title">
+                <h2>Can you beat the BOSS?</h2>
+                <div>Touch the screen to start</div>
             </div>
 
             <!--Viewer canvas-->
@@ -92,18 +96,14 @@
             </div>
 
             <div id="reset-holder">
-                <div id="reset">
-                    <div id="reset-text">Reset</div>
+                <div id="reset" class="mybutton">
+                    <div>Reset</div>
                 </div>
-            </div>
-
-            <!--Sliders-->
-            <div id="parameters" class="sidebar">
-                <h1>Parameters</h1>
             </div>
 
             <!--Linear sliders-->
             <div class="slidecontainer">
+                <h1>Bond rotations</h1>
                 <div class="sliderholder">
                     <p>0°</p>
                     <input type="range" min="0" max="36" step="1" value="0" class="slider" id="d4">

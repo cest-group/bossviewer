@@ -3,9 +3,11 @@ import { StructureViewer } from './structureviewer.js';
 // Hide load message after page load
 window.onload = function(){
     document.getElementById("loadscreen").style.display = "none";
-    document.getElementById("tab1").onclick = function() {openTab('tab1-content');};
-    document.getElementById("tab2").onclick = function() {openTab('tab2-content');};
-    document.getElementById("tab3").onclick = function() {openTab('tab3-content');};
+    document.getElementById("tab1").onclick = function() {openTab('tab1');};
+    document.getElementById("tab2").onclick = function() {openTab('tab2');};
+    document.getElementById("tab3").onclick = function() {openTab('tab3');};
+    document.getElementById("tab4").onclick = function() {openTab('tab4');};
+    document.getElementById("tab5").onclick = function() {openTab('tab5');};
 };
 
 //==============================================================================
@@ -84,8 +86,8 @@ viewer.atoms.attach(d7_group);
 
 // Recolor the bonds
 bond02.getObjectByName("fill").material.color.setHex(0x00ff00);  // d4
-bond911.getObjectByName("fill").material.color.setHex(0x0000ff); // d13
-bond05.getObjectByName("fill").material.color.setHex(0xff0000);  // d7
+bond911.getObjectByName("fill").material.color.setHex(0x774cc1); // d13
+bond05.getObjectByName("fill").material.color.setHex(0xff720c);  // d7
 bond09.getObjectByName("fill").material.color.setHex(0x000000);  // d11
 viewer.render();
 
@@ -262,6 +264,7 @@ reset.onclick = function() {
     d13.oninput();
     updateMinEnergy(ENERGIES[0][0][0][0][4]);
     viewer.controls.reset();
+    openTab('tab1');
 };
 
 function openTab(tabName) {
@@ -275,7 +278,7 @@ function openTab(tabName) {
   for (i = 0; i < x.length; i++) {
       tablinks[i].className = tablinks[i].className.replace(" is-active", "");
   }
-  document.getElementById(tabName).style.display = "block";
-  event.currentTarget.className += " is-active";
+  document.getElementById(tabName+"-content").style.display = "block";
+  document.getElementById(tabName).className += " is-active";
 }
 
