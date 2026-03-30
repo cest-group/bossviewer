@@ -1,133 +1,193 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-    <head>
-        <title></title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width">
-        <link rel="stylesheet" href="css/styles.css?v=1.0">
-    </head>
-    <body>
-        <div class="cont">
-
-            <!--Buttons-->
-            <div id="header">
-                <div id="tab1" class="tab is-active mybutton">
-                    <div>Info</div>
-                </div>
-                <div id="tab2" class="tab mybutton">
-                    <div>Alanine</div>
-                </div>
-                <div id="tab3" class="tab mybutton">
-                    <div>Hints</div>
-                </div>
-                <div id="tab4" class="tab mybutton">
-                    <div>BOSS AI</div>
-                </div>
-                <div id="tab5" class="tab mybutton">
-                    <div>Our team</div>
-                </div>
-            </div>
-
-            <!--Info-->
-            <div id="info">
-                <div>
-                    <div id="tab1-content" class="content-tab" >
-                        <p>Understanding the structure of materials can help us study and refine their technological properties, but configurational structure search is difficult. Too many simulations are needed to solve the problem, and the solution is not easy to guess. Here, you can do your own configuration search on the example of a small molecule - alanine. Build your own physical model of alanine and try to rotate bonds like on the screen.</p>
-                    </div>
-                    <div id="tab2-content" class="content-tab" style="display:none">
-                        <p>Alanine molecule is a tiny amino-acid, the smallest component of proteins. It was found to have 13 conformers: different molecule shapes formed by bond rotations. The most likely form of alanine in nature is the conformer with the lowest internal energy E. Can you find which one it is by playing the energy game? Move the bond rotation sliders until you find the structure with the lowest energy.</p>
-                    </div>
-                    <div id="tab3-content" class="content-tab" style="display:none">
-                        <p>Different parts of alanine molecule interact with each other via electrostatics and hydrogen bonding (e.g. N+, O-). When the interactions are favorable, the internal energy of the molecule is lowered.</p>
-                    </div>
-                    <div id="tab4-content" class="content-tab" style="display:none">
-                        <p>BOSS is an AI that relies on Bayesian Optimization method to perform configurational structure search of materials. It learns by watching, just like a child. The more structures it sees, the better it can predict which configurations have the lowest energy, and are the most likely found in nature. BOSS is far more efficient than humans in identifying the most stable forms of matter.</p>
-                    </div>
-                    <div id="tab5-content" class="content-tab" style="display:none">
-                        <p>To be filled</p>
-                    </div>
-                </div>
-            </div>
-
-            <div id="title">
-                <h2>Can you beat the BOSS?</h2>
-                <div>Touch the screen to start</div>
-            </div>
-
-            <!--Viewer canvas-->
-            <div id="viewer-canvas">
-                <div id="canvas"></div>
-            </div>
-
-            <div id="energies">
-                <div id="energy">
-                    <div>Energy:</div>
-                    <div id="energy-value">X</div>
-                    <div>kcal/mol</div>
-                </div>
-                <!--<div id="min-energy">Your minimum: <span id="min-energy-value">X</span> eV</div>-->
-                <div id="energy-slider">
-                    <div class="energy-slider-end-bar"></div>
-                    <div id="energy-slider-middle-bar">
-                        <div class="energy-slider-range">
-                            <div class="energy-slider-knob-holder">
-                                <div id="energy-slider-knob"></div>
-                            </div>
-                        </div>
-                        <div class="energy-slider-range">
-                            <div class="energy-slider-knob-holder">
-                                <div id="energy-slider-min-knob"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="energy-slider-end-bar"></div>
-                </div>
-                <div id="min-energy">
-                    <div>Your minimum:</div>
-                    <div id="energy-min-value">X</div>
-                    <div>kcal/mol</div>
-                </div>
-            </div>
-
-            <div id="reset-holder">
-                <div id="reset" class="mybutton">
-                    <div>Reset</div>
-                </div>
-            </div>
-
-            <!--Linear sliders-->
-            <div class="slidecontainer">
-                <h1>Bond rotations</h1>
-                <div class="sliderholder">
-                    <p>0°</p>
-                    <input type="range" min="0" max="360" step="10" value="0" class="slider" id="d4">
-                    <p>360°</p>
-                </div>
-                <div class="sliderholder">
-                    <p>0°</p>
-                    <input type="range" min="0" max="360" step="10" value="0" class="slider" id="d7">
-                    <p>360°</p>
-                </div>
-                <div class="sliderholder">
-                    <p>0°</p>
-                    <input type="range" min="0" max="360" step="10" value="0" class="slider" id="d11">
-                    <p>360°</p>
-                </div>
-                <div class="sliderholder">
-                    <p>0°</p>
-                    <input type="range" min="0" max="360" step="10" value="0" class="slider" id="d13">
-                    <p>360°</p>
-                </div>
-            </div>
+  <head>
+    <title></title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="css/styles.css?v=1.0" />
+  </head>
+  <body>
+    <div class="cont">
+      <!--Buttons-->
+      <div id="header">
+        <div id="tab1" class="tab is-active mybutton">
+          <div>Info</div>
         </div>
+        <div id="tab2" class="tab mybutton">
+          <div>Alanine</div>
+        </div>
+        <div id="tab3" class="tab mybutton">
+          <div>Hints</div>
+        </div>
+        <div id="tab4" class="tab mybutton">
+          <div>BOSS AI</div>
+        </div>
+        <div id="tab5" class="tab mybutton">
+          <div>Our team</div>
+        </div>
+      </div>
 
-        <!--Load here to not block UI-->
-        <script src="js/rafpolyfill.js"></script>
-        <script src="js/three.min.js"></script>
-        <script src="js/math.min.js"></script>
-        <script src="js/orthographiccontrols.js"></script>
-        <script src="js/dat.gui.min.js"></script>
-        <script src="data/geometry.js"></script>
-        <script src="js/main.js"></script>
-    </body>
+      <!--Info-->
+      <div id="info">
+        <div>
+          <div id="tab1-content" class="content-tab">
+            <p>
+              Understanding the structure of materials can help us study and
+              refine their technological properties, but configurational
+              structure search is difficult. Too many simulations are needed to
+              solve the problem, and the solution is not easy to guess. Here,
+              you can do your own configuration search on the example of a small
+              molecule - alanine. Build your own physical model of alanine and
+              try to rotate bonds like on the screen.
+            </p>
+          </div>
+          <div id="tab2-content" class="content-tab" style="display: none">
+            <p>
+              Alanine molecule is a tiny amino-acid, the smallest component of
+              proteins. It was found to have 13 conformers: different molecule
+              shapes formed by bond rotations. The most likely form of alanine
+              in nature is the conformer with the lowest internal energy E. Can
+              you find which one it is by playing the energy game? Move the bond
+              rotation sliders until you find the structure with the lowest
+              energy.
+            </p>
+          </div>
+          <div id="tab3-content" class="content-tab" style="display: none">
+            <p>
+              Different parts of alanine molecule interact with each other via
+              electrostatics and hydrogen bonding (e.g. N+, O-). When the
+              interactions are favorable, the internal energy of the molecule is
+              lowered.
+            </p>
+          </div>
+          <div id="tab4-content" class="content-tab" style="display: none">
+            <p>
+              BOSS is an AI that relies on Bayesian Optimization method to
+              perform configurational structure search of materials. It learns
+              by watching, just like a child. The more structures it sees, the
+              better it can predict which configurations have the lowest energy,
+              and are the most likely found in nature. BOSS is far more
+              efficient than humans in identifying the most stable forms of
+              matter.
+            </p>
+          </div>
+          <div id="tab5-content" class="content-tab" style="display: none">
+            <p>To be filled</p>
+          </div>
+        </div>
+      </div>
+
+      <div id="title">
+        <h2>Can you beat the BOSS?</h2>
+        <!--<div>Touch the screen to start</div>-->
+      </div>
+
+      <!--Viewer canvas-->
+      <div id="viewer-canvas">
+        <div id="canvas"></div>
+      </div>
+
+      <div id="energies">
+        <div id="energy">
+          <div>Energy:</div>
+          <div id="energy-value">X</div>
+          <div>kcal/mol</div>
+        </div>
+        <!--<div id="min-energy">Your minimum: <span id="min-energy-value">X</span> eV</div>-->
+        <div id="energy-slider">
+          <div class="energy-slider-end-bar"></div>
+          <div id="energy-slider-middle-bar">
+            <div class="energy-slider-range">
+              <div class="energy-slider-knob-holder">
+                <div id="energy-slider-knob"></div>
+              </div>
+            </div>
+            <div class="energy-slider-range">
+              <div class="energy-slider-knob-holder">
+                <div id="energy-slider-min-knob"></div>
+              </div>
+            </div>
+          </div>
+          <div class="energy-slider-end-bar"></div>
+        </div>
+        <div id="min-energy">
+          <div>Your minimum:</div>
+          <div id="energy-min-value">X</div>
+          <div>kcal/mol</div>
+        </div>
+      </div>
+
+      <div id="reset-holder">
+        <div id="reset" class="mybutton">
+          <div>Reset</div>
+        </div>
+      </div>
+
+      <!--Linear sliders-->
+      <div class="slidecontainer">
+        <h1>Bond rotations</h1>
+        <div class="sliderholder">
+          <p>0°</p>
+          <input
+            type="range"
+            min="0"
+            max="360"
+            step="10"
+            value="0"
+            class="slider"
+            id="d4"
+          />
+          <p>360°</p>
+        </div>
+        <div class="sliderholder">
+          <p>0°</p>
+          <input
+            type="range"
+            min="0"
+            max="360"
+            step="10"
+            value="0"
+            class="slider"
+            id="d7"
+          />
+          <p>360°</p>
+        </div>
+        <div class="sliderholder">
+          <p>0°</p>
+          <input
+            type="range"
+            min="0"
+            max="360"
+            step="10"
+            value="0"
+            class="slider"
+            id="d11"
+          />
+          <p>360°</p>
+        </div>
+        <div class="sliderholder">
+          <p>0°</p>
+          <input
+            type="range"
+            min="0"
+            max="360"
+            step="10"
+            value="0"
+            class="slider"
+            id="d13"
+          />
+          <p>360°</p>
+        </div>
+      </div>
+    </div>
+
+    <!--Load here to not block UI-->
+    <script src="js/rafpolyfill.js"></script>
+    <script src="js/three.min.js"></script>
+    <script src="js/math.min.js"></script>
+    <script src="js/orthographiccontrols.js"></script>
+    <script src="js/dat.gui.min.js"></script>
+    <script src="data/geometry.js"></script>
+    <script src="js/main.js"></script>
+  </body>
 </html>
